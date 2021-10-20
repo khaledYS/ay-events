@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Ay onclick listeners</title>
+</head>
+<body>
+    <div>
+        <h1>Pro Tip:&ThickSpace; </h1>
+        <h1>Double click the element to copy the class</h1>
+    </div>
+    <!-- on click  -->
+    <button class="ay-events-onclick-toggle" ay-events-onclick-toggle="active" when-copy="ay-events-onclick-toggle">Click -toggle</button>
+    <button class="ay-events-onclick-add" ay-events-onclick-add="active" when-copy="ay-events-onclick-add">Click -add</button>
+    <button class="ay-events-onclick-remove active" ay-events-onclick-remove="active" when-copy="ay-events-onclick-remove">Click -remove</button>
+    <!-- on hover -->
+    <button class="ay-events-hover-enter-add" ay-events-hover-enter-add="active" when-copy="ay-events-hover-enter-add">hover -enter -add</button>
+    <button class="ay-events-hover-enter-remove active" ay-events-hover-enter-remove="active" when-copy="ay-events-hover-enter-remove">hover -enter -remove</button>
+    <button class="ay-events-hover-exit-add" ay-events-hover-exit-add="active" when-copy="ay-events-hover-exit-add">hover -exit -add</button>
+    <button class="ay-events-hover-exit-remove active" ay-events-hover-exit-remove="active" when-copy="ay-events-hover-exit-remove">hover -exit -remove</button>
+    <button class="ay-events-hover-toggle" ay-events-hover-toggle="active" when-copy="ay-events-hover-toggle">hover -toggle</button>
+
+    <script>
+        const btns = document.querySelectorAll('button');
+        btns.forEach(btn=>{
+            console.log('hi')
+            btn.ondblclick = ()=>{
+                console.log(btn.getAttribute('when-copy'))
+                const field = document.createElement("input")
+                field.type = "text"
+                field.value = btn.getAttribute('when-copy')
+                document.body.append(field)
+                field.select();
+                field.setSelectionRange(0, 99999);
+                navigator.clipboard.writeText(field.value);
+                
+                window.alert("Copied: " + field.value)
+                field.remove()
+            }
+        })
+    </script>
+    <script src="scripts/main.js"></script>
+    <script>
+        new Ay_events();
+    </script>
+</body>
+</html>
